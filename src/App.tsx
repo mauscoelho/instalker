@@ -1,20 +1,24 @@
+import { createBrowserHistory } from "history";
 import * as React from "react";
-import "./App.css";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
+import Login from "./pages/Login";
 
-import logo from "./logo.svg";
+const history = createBrowserHistory();
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Story viewer for Instagram</h1>
-        </header>
-        <p className="App-intro">
-          React application to improve the way that you see your story viewers
-        </p>
-      </div>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route
+            path={"*"}
+            render={() => {
+              return <Redirect exact to="/login" />;
+            }}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
