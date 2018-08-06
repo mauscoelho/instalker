@@ -1,7 +1,7 @@
 import { createBrowserHistory } from "history";
 import * as React from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
-import Login from "./pages/Login";
+import Home from "./pages/Home";
 
 const history = createBrowserHistory();
 
@@ -10,11 +10,11 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/home" component={Home} />
           <Route
             path={"*"}
             render={() => {
-              return <Redirect exact to="/login" />;
+              return <Redirect exact to="/home" />;
             }}
           />
         </Switch>
