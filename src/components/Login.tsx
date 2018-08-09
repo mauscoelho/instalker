@@ -44,7 +44,7 @@ class Login extends React.Component<LoginProps> {
           }}
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={onSubmit}>
+        <Button variant="contained" color="secondary" onClick={onSubmit}>
           Login
         </Button>
       </div>
