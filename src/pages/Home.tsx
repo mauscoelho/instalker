@@ -1,51 +1,51 @@
 import * as React from "react";
 import "./Home.css";
-
 import Login from "../components/Login";
 import ToolbarComponent from "../components/Toolbar";
+import { CircularProgress } from "@material-ui/core";
 
-interface HomeState {
-  showLogin: boolean;
-  username: string;
-  password: string;
-}
+const API = process.env.REACT_APP_API;
 
-class Home extends React.Component<any, HomeState> {
-  public state: HomeState = {
-    showLogin: true,
-    username: "",
-    password: ""
+const Home = () => {
+  const [logged, setLogged] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const onSubmit = async (event: any) => {
+    event.preventDefault();
+
+    setLoading(true);
+
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    const data = {
+      username,
+      password,
+      index: 0
+    };
+    try {
+      const result = await fetch(`${API}/helloWorld`, {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      const response = await result.json();
+
+      console.log(response);
+
+      setLoading(false);
+      setLogged(true);
+    } catch (err) {
+      setLoading(false);
+    }
   };
 
-  public render() {
-    const { showLogin, username, password } = this.state;
-    return (
-      <div className="App">
-        <ToolbarComponent />
-        {showLogin && (
-          <Login
-            username={username}
-            password={password}
-            onChangeUsername={this.onChangeUsername}
-            onChangePassword={this.onChangePassword}
-            onSubmit={this.onSubmit}
-          />
-        )}
-      </div>
-    );
-  }
-
-  private onChangeUsername = (event: any) => {
-    this.setState({ username: event.text });
-  };
-
-  private onChangePassword = (event: any) => {
-    this.setState({ password: event.text });
-  };
-
-  private onSubmit = (event: any) => {
-    console.log(event);
-  };
-}
+  return (
+    <div className="App">
+      <ToolbarComponent />
+      {loading && <CircularProgress />}
+      {!logged && <Login onSubmit={onSubmit} />}
+    </div>
+  );
+};
 
 export default Home;
