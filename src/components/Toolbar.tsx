@@ -10,7 +10,7 @@ class ToolbarComponent extends React.Component {
       <AppBar position="static" color="primary">
         <Toolbar>
           <Typography variant="title" color="inherit">
-            Story Viewer
+            Story Filter
           </Typography>
         </Toolbar>
       </AppBar>
