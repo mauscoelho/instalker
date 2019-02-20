@@ -1,5 +1,6 @@
 import * as React from "react";
-import { ListItem, Avatar, ListItemText } from "@material-ui/core";
+
+import { Avatar, ListItem, ListItemText } from "@material-ui/core";
 
 export interface ViewerModel {
   id: number;
